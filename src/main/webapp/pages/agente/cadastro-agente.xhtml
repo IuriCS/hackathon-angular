@@ -1,0 +1,45 @@
+<ui:composition template="/pages/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Cadastro de Agentes</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmAgente">
+		
+			<p:panelGrid columns="2">			
+				<p:outputLabel value="Nome" for="nome"/>
+				<p:inputText id="nome" value="#{agenteBean.agente.nome}" />
+				<p:outputLabel value="Data de Contração" for="dataContratacao"/>
+				<p:calendar id="dataContratacao" value="#{agenteBean.agente.dataContratacao}" />
+			</p:panelGrid>
+
+			<p:commandButton value="Cadastrar agente" action="#{agenteBean.salva}" update="@form" style="margin-top: 10px; margin-bottom: 10px;"/>
+			
+			<p:dataTable id="tableAgentes" value="#{agenteBean.agentes}" var="agente">
+				<p:column headerText="ID">
+					<h:outputLabel value="#{agente.id}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputLabel value="#{agente.nome}" />
+				</p:column>
+				<p:column headerText="Data de Contratação">
+					<h:outputLabel value="#{agente.dataContratacao}" >
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputLabel>
+				</p:column>
+				<p:column style="width: 100px; text-align: center">
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" action="#{agenteBean.excluir}"
+							process="@this" update=":frmAgente">
+						<f:setPropertyActionListener target="#{agenteBean.agenteSelecionado}" value="#{agente}" />
+					</p:commandButton>
+	    		</p:column>
+		    </p:dataTable>
+			
+		</h:form>
+		
+	</ui:define>
+</ui:composition>

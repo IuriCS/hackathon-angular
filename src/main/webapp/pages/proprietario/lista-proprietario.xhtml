@@ -1,0 +1,56 @@
+<ui:composition template="/pages/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Cadastro de Agentes</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmProprietario">
+			
+			<p:dataTable id="tableProprietario" value="#{proprietarioBean.proprietarios}" var="proprietario">
+				<p:column headerText="ID">
+					<h:outputLabel value="#{proprietario.id}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputLabel value="#{proprietario.nome}" />
+				</p:column>
+				<p:column headerText="Data de Contratação">
+					<h:outputLabel value="#{proprietario.dataNascimento}" >
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputLabel>
+				</p:column>
+				<p:column headerText="CPF">
+					<h:outputLabel value="#{proprietario.cpf}" />
+				</p:column>
+				<p:column headerText="Sexo">
+					<h:outputLabel value="#{proprietario.sexo.descricao}" />
+				</p:column>
+				<p:column headerText="Telefones" style="width: 100px; text-align: center">
+	    			<p:commandButton icon="ui-icon-extlink" title="Telefones" action="#{proprietarioBean.buscarProprietarioComTelefone}"
+	    					process="@this" onclick="PF('mostraTelefones').show();" >
+	    				<f:setPropertyActionListener target="#{proprietarioBean.proprietarioSelecionado}" value="#{proprietario}" />
+	    			</p:commandButton>
+	    		</p:column>
+				<p:column style="width: 100px; text-align: center">
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" action="#{proprietarioBean.excluir}"
+							process="@this" update=":frmProprietario">
+						<f:setPropertyActionListener target="#{proprietarioBean.proprietarioSelecionado}" value="#{proprietario}" />
+					</p:commandButton>
+	    		</p:column>
+		    </p:dataTable>
+		    
+		    <p:dialog id="mostraTelefonesDialog" header="Telefones" widgetVar="mostraTelefones" modal="true">
+    			<p:dataList value="#{proprietarioBean.proprietarioSelecionado.telefones}" var="telefone" itemType="disc"
+    					rendered="#{not empty proprietarioBean.proprietarioSelecionado.telefones}">
+    				#{telefone.id.ddd} - #{telefone.id.numero}
+    			</p:dataList>
+    			<h:outputText value="Nenhum telefone" rendered="#{empty proprietarioBean.proprietarioSelecionado.telefones}"/>
+			</p:dialog>
+			
+		</h:form>
+		
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title><ui:insert name="titulo" >Sistema Stefanini Detran</ui:insert></title>
+		<script src="http://maps.google.com/maps/api/js?key=AIzaSyDS3mIFEXQ4xwqr2NpB0dMysmmVRpIlCVQ" type="text/javascript"></script>
+	</h:head>
+	
+	<h:body>
+ 
+	<p:megaMenu orientation="horizontal" style="margin-top:20px; margin-bottom:20px; ">
+	    <p:submenu label="Agentes" icon="ui-icon-check">
+	        <p:column>
+	            <p:submenu label="Cadastro">
+	                <p:menuitem value="Cadastro de agente" url="/pages/agente/cadastro-agente.xhtml" />
+	            </p:submenu>
+	        </p:column>
+	    </p:submenu>
+	 	<p:submenu label="Proprietário" icon="ui-icon-check">
+	        <p:column>
+	            <p:submenu label="Cadastro">
+	                <p:menuitem value="Cadastro de proprietario" url="/pages/proprietario/cadastro-proprietario.xhtml" />
+	            </p:submenu>
+	            <p:submenu label="Listagem">
+	                <p:menuitem value="Listagem de proprietario" url="/pages/proprietario/lista-proprietario.xhtml" />
+	            </p:submenu>
+	        </p:column>
+	    </p:submenu>
+	    <p:submenu label="Modelo" icon="ui-icon-check">
+	        <p:column>
+	            <p:submenu label="Cadastro">
+	                <p:menuitem value="Cadastro de modelo de veiculo" url="/pages/veiculo/modelo/cadastro-modelo-veiculo.xhtml" />
+	            </p:submenu>
+	        </p:column>
+	    </p:submenu>
+	    <p:submenu label="Veiculo" icon="ui-icon-check">
+	        <p:column>
+	            <p:submenu label="Cadastro">
+	                <p:menuitem value="Cadastro de veiculo" url="/pages/veiculo/cadastro-veiculo.xhtml" />
+	            </p:submenu>
+	        </p:column>
+	    </p:submenu>
+	    <p:submenu label="Infração" icon="ui-icon-check">
+	        <p:column>
+	            <p:submenu label="Cadastro">
+	                <p:menuitem value="Cadastro do local da Infração" url="/pages/infracao/detalhes/cadastro-local-infracao.xhtml" />
+	                <p:menuitem value="Cadastro do tipo da Infração" url="/pages/detalhes/infracao/cadastro-tipo-infracao.xhtml" />
+	                <p:menuitem value="Cadastro da Infração" url="/pages/infracao/cadastro-infracao.xhtml" />
+	            </p:submenu>
+	        </p:column>
+	    </p:submenu>
+	 	
+	    <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+	</p:megaMenu>
+	
+		<p:panel id="sistemaDetran" style="margin-bottom:20px">
+			<ui:insert name="corpo" />
+		</p:panel>
+		
+	</h:body>
+</html>

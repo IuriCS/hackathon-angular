@@ -1,0 +1,43 @@
+<ui:composition template="/pages/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Cadastro de Modelos de Veeiculos</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmModeloVeiculo">
+			<p:panelGrid columns="2">
+				<h:panelGroup >
+					<p:outputLabel for="categoria" value="Descrição do Modelo do Veículo" />
+					<p:inputTextarea value="#{modeloBean.modelo.descricao}"/>
+				</h:panelGroup>
+				
+				<h:panelGroup>					
+					<p:selectOneMenu id="categoria" value="#{modeloBean.modelo.categoria}">
+						<f:selectItem itemLabel="Selecione Categoria" noSelectionOption="true"/>
+						<f:selectItems value="#{modeloBean.categorias}" var="categoria" itemLabel="#{categoria}" itemValue="#{categoria}"/>
+					</p:selectOneMenu>
+				</h:panelGroup>
+			</p:panelGrid>
+			
+			<br />
+			<p:commandButton value="Salvar modelo de veiculo" action="#{modeloBean.salva}" update=":frmModeloVeiculo :tableModeloVeiculo"/>
+		</h:form>
+		
+		<p:dataTable id="tableModeloVeiculo" value="#{modeloBean.modelos}" var="modelo">
+			<p:column headerText="ID">
+				<h:outputLabel value="#{modelo.id}" />
+			</p:column>
+			<p:column headerText="Nome">
+				<h:outputLabel value="#{modelo.descricao}" />
+			</p:column>
+			<p:column headerText="Categoria">
+				<h:outputLabel value="#{modelo.categoria}" />
+			</p:column>
+		</p:dataTable>
+		
+	</ui:define>
+</ui:composition>

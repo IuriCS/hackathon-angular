@@ -1,0 +1,28 @@
+<ui:composition template="/pages/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<p:panel>
+			<h:form>
+				<p:outputLabel value="Cadastrar tipo infração" />
+				<p:panelGrid columns="2">
+
+					<p:outputLabel value="Descrição: " for="desc" />
+					<p:inputText id="desc" value="#{tipoInfracaoBean.tipo.descricaoTipoInfracao}" />
+
+					<p:outputLabel value="Valor: " for="valor" />
+					<p:inputText id="valor" value="#{tipoInfracaoBean.tipo.valor}" />
+
+				</p:panelGrid>
+				
+				<br />
+				
+				<p:commandButton value="Cadastrar" action="#{tipoInfracaoBean.cadastrar()}" />
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,55 @@
+<ui:composition template="/pages/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<p:panel>
+			<h:form>
+				<h:outputText value="Cadastrar infração" />
+				<p:panelGrid columns="2">
+				
+					<p:outputLabel for="t" value="Tipo: " />
+					<p:selectOneMenu id="t" value="#{infracaoBean.tipoId}">
+						<f:selectItem itemLabel="Selecione um tipo" itemValue="" />
+						<f:selectItems value="#{infracaoBean.tipos}" var="t" itemValue="#{t.id}" itemLabel="#{t.descricaoTipoInfracao} - Valor: #{t.valor}" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel for="l" value="Local: " />
+					<p:selectOneMenu id="l" value="#{infracaoBean.localId}">
+						<f:selectItem itemLabel="Selecione um local" itemValue="" />
+						<f:selectItems value="#{infracaoBean.locais}" itemValue="#{l.id}" itemLabel="#{l.descricaoLocalInfracao} - Velocidade permitida: #{l.velocidadePermitida}" var="l" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Agente:" for="ag" />
+					<p:autoComplete id="ag" value="#{infracaoBean.agenteId}" completeMethod="#{infracaoBean.completar}" itemLabel="#{a.nome}" var="a" itemValue="#{a.id}" />
+					
+					<p:outputLabel value="Placa:" for="pl" />
+					<p:autoComplete id="pl" value="#{infracaoBean.veiculoId}"
+						completeMethod="#{infracaoBean.completarVeiculo}"
+						itemLabel="#{v.placa}" var="v" itemValue="#{v.id}" />
+
+					<p:outputLabel value="Velocidade:" for="vl" />
+					<p:inputText value="#{infracaoBean.infracao.velocidade}" id="vl" />
+
+				</p:panelGrid>
+				
+				<br />
+				
+				<p:commandButton value="Cadastrar" action="#{infracaoBean.cadastrar()}" />
+				
+			</h:form>
+			
+		</p:panel>
+		
+		<p:panel rendered="#{!infracaoBean.infracoes.isEmpty()}">
+			<p:dataTable value="#{infracaoBean.infracoes}" var="i">
+				<p:column headerText="Tipo">
+					#{i.tipo}
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>

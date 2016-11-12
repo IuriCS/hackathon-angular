@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/pages/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Cadastro de Proprietários</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form id="frmProprietario">
+			
+			<p:fieldset legend="Proprietario" style="margin-bottom:20px">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Nome" for="nome" />
+					<p:inputText id="nome" value="#{proprietarioBean.proprietario.nome}"/>
+					
+					<p:outputLabel value="Sexo" for="sexo" />
+					<p:selectOneMenu id="sexo" value="#{proprietarioBean.proprietario.sexo}">
+						<f:selectItem itemLabel="Selecione o Sexo:" noSelectionOption="true"/>
+						<f:selectItems value="#{proprietarioBean.sexos}" var="sexo" itemValue="#{sexo}" itemLabel="#{sexo.descricao}"/>
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="CPF" for="cpf" />
+					<p:inputText id="cpf" value="#{proprietarioBean.proprietario.cpf}"/>
+					
+					<p:outputLabel value="Data de Nascimento" for="dataNascimento" />
+					<p:calendar id="dataNascimento" value="#{proprietarioBean.proprietario.dataNascimento}"/>
+				</p:panelGrid>
+			</p:fieldset>	
+				
+								
+			<p:fieldset legend="Endereço" style="margin-bottom:20px">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Endereço" for="endereco" />
+					<p:inputText id="endereco" value="#{proprietarioBean.proprietario.endereco.endereco}"/>
+					
+					<p:outputLabel value="Bairro" for="bairro" />
+					<p:inputText id="bairro" value="#{proprietarioBean.proprietario.endereco.bairro}"/>
+					
+					<p:outputLabel value="Cidade" for="cidade" />
+					<p:inputText id="cidade" value="#{proprietarioBean.proprietario.endereco.cidade}"/>
+					
+					<p:outputLabel value="UF" for="uf" />
+					<p:inputText id="uf" value="#{proprietarioBean.proprietario.endereco.uf}"/>
+				</p:panelGrid>
+			</p:fieldset>
+									
+		</h:form>
+		
+		<h:form id="frmTelefone">
+			<p:fieldset legend="Telefone" style="margin-bottom:20px">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="DDD" for="ddd" />
+					<p:inputText id="ddd" value="#{proprietarioBean.telefone.id.ddd}"/>
+					
+					<p:outputLabel value="Numero de Telefone" for="numero" />
+					<p:inputText id="numero" value="#{proprietarioBean.telefone.id.numero}"/>
+					
+					<p:outputLabel value="Tipo do Telefone" for="tipoTelefone" />
+					<p:selectOneMenu id="tipoTelefone" value="#{proprietarioBean.telefone.tipo}">
+						<f:selectItem itemLabel="Selecione o tipo telefone:" noSelectionOption="true"/>
+						<f:selectItems value="#{proprietarioBean.tipoTelefone}" var="telefone" itemValue="#{telefone}" itemLabel="#{telefone.descricao}"/>
+					</p:selectOneMenu>
+					
+					<p:commandButton action="#{proprietarioBean.salvarTelefone}" value="Salvar Telefone" update="@form"/>
+				</p:panelGrid>
+			</p:fieldset>
+		</h:form>
+		
+		<p:commandButton action="#{proprietarioBean.salvar}" value="Salvar Proprietario" update="frmProprietario"/>
+	</ui:define>
+</ui:composition>

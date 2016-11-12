@@ -1,0 +1,16 @@
+<ui:composition template="/pages/template/template.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Cadastro de Proprietarios</ui:define>
+
+	<ui:define name="corpo">
+		<h:form>
+			<h1>Proprietario #{proprietarioBean.proprietario.nome} salvo com sucesso</h1>
+
+			<p:commandButton action="#{proprietarioBean.novoProprietario}" value="Inserir novo proprietario" />
+		</h:form>
+	</ui:define>
+</ui:composition>

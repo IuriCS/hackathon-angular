@@ -1,0 +1,35 @@
+<ui:composition template="/pages/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="corpo">
+		<p:panel>
+			<h:form>
+				<p:panelGrid columns="2">
+					<p:outputLabel value="UF" for="uf" />
+					<p:inputText value="#{veiculoBean.veiculo.uf}" id="uf" />
+
+					<p:outputLabel for="pro" value="Proprietario " />
+					<p:selectOneMenu id="pro" value="#{veiculoBean.idProprietario}">
+						<f:selectItem itemLabel="Selecione um Proprietario" itemValue="" />
+						<f:selectItems value="#{veiculoBean.proprietarios}" var="p" itemLabel="#{p.nome}" itemValue="#{p.id}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="mo" value="Modelo " />
+					<p:selectOneMenu id="mo" value="#{veiculoBean.idModelo}">
+						<f:selectItem itemLabel="Selecione um Modelo" itemValue="" />
+						<f:selectItems value="#{veiculoBean.modelos}" var="p" itemLabel="#{p.descricao}" itemValue="#{p.id}" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Placa:" for="placa" />
+					<p:inputText value="#{veiculoBean.veiculo.placa}" id="placa" />
+				</p:panelGrid>
+				
+				<p:commandButton value="Cadastrar" action="#{veiculoBean.salva}" />
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
